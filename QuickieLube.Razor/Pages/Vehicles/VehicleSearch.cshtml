@@ -1,0 +1,41 @@
+﻿@page 
+@model QuickieLube.Razor.Pages.Vehicles.VehicleSearchModel
+@{
+    ViewData["Title"] = "Vehicle Search";
+}
+
+<div>
+    <div class="d-flex justify-content-center"><h3>Vehicle Search</h3></div>
+    <div class="">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-md-6 p-xl-3">
+                <div class="form"><form method="get" asp-page-handler="OnGet"><button type="submit" class="fa fa-search"></button><input type="text" asp-for="SearchParams" class="form-control form-input shadow p-3 mb-5 bg-body rounded" placeholder="Search by vehicle id, name, vin"></form><form method="get"><span class="left-pan"><button type="submit" class="fa fa-times-circle"></button></span></form></div>
+            </div>
+            <table class="table table-responsive p-xl-3">
+                <thead>
+                    <tr>
+                        <th>Vehicle ID</th>
+                        <th>Name</th>
+                        <th>Vehicle</th>
+                        <th>VIN</th>
+                        <th>Fleet</th>
+                        <th>Last Service</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var vehicle in Model.Vehicles)
+                    {
+                        <tr>
+                            <td>@vehicle.Id</td>
+                            <td>@vehicle.Name</td>
+                            <td>@vehicle.Description</td>
+                            <td>@vehicle.VIN</td>
+                            <td>@vehicle.Fleet</td>
+                            <td>@vehicle.LastService.ToString("yyyy-MM-dd")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
