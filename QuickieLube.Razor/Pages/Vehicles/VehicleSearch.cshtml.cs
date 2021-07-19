@@ -12,7 +12,6 @@ namespace QuickieLube.Razor.Pages.Vehicles
     public class VehicleSearchModel : PageModel
     {
         private readonly IVehicleRepository _vehicleRepository;
-
         [BindProperty(SupportsGet = true)]
         public IEnumerable<Vehicle> Vehicles { get; set; }
 
@@ -37,6 +36,12 @@ namespace QuickieLube.Razor.Pages.Vehicles
             }
 
         }
-      
+
+        public void OnPostClearSearchField()
+        {
+            SearchParams = "";
+            OnGet();
+        }
+
     }
 }

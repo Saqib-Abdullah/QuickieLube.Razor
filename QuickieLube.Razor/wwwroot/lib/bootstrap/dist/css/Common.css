@@ -252,3 +252,7 @@ a.article:hover {
     color: black;
     padding: 15px;
 }
+
+.highlight {
+    background-color: #d1124182;
+}

@@ -9,7 +9,7 @@ namespace QuickieLube.Application.Vehicles
 {
     public class VehicleRepository : IVehicleRepository
     {
-        private readonly List<Vehicle> _vehicles;
+        private List<Vehicle> _vehicles;
 
         public VehicleRepository()
         {
@@ -37,6 +37,27 @@ namespace QuickieLube.Application.Vehicles
                                            s.Name.Contains(searchParams, StringComparison.OrdinalIgnoreCase) ||
                                            s.VIN.Contains(searchParams, StringComparison.OrdinalIgnoreCase))
                                            .OrderByDescending(s => s.LastService);
+        }
+
+        public Vehicle EditVehicle(string id)
+        {
+            return _vehicles.FirstOrDefault(s => s.Id == id);
+        }
+
+        public Vehicle UpdateVehicle(Vehicle updatedVehicle)
+        {
+            Vehicle vehicle = _vehicles.FirstOrDefault(s => s.Id == updatedVehicle.Id);
+
+            if (vehicle != null)
+            {
+                vehicle.Name = updatedVehicle.Name;
+                vehicle.Description = updatedVehicle.Description;
+                vehicle.VIN = updatedVehicle.VIN;
+                vehicle.Fleet = updatedVehicle.Fleet;
+                vehicle.LastService = updatedVehicle.LastService;
+            }
+
+            return vehicle;
         }
     }
 }

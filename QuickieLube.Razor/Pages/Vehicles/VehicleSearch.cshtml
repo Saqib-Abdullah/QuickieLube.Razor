@@ -1,4 +1,5 @@
-﻿@page 
+﻿@page "{handler?}"
+
 @model QuickieLube.Razor.Pages.Vehicles.VehicleSearchModel
 @{
     ViewData["Title"] = "Vehicle Search";
@@ -9,9 +10,22 @@
     <div class="">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-6 p-xl-3">
-                <div class="form"><form method="get" asp-page-handler="OnGet"><button type="submit" class="fa fa-search"></button><input type="text" asp-for="SearchParams" class="form-control form-input shadow p-3 mb-5 bg-body rounded" placeholder="Search by vehicle id, name, vin"></form><form method="get"><span class="left-pan"><button type="submit" class="fa fa-times-circle"></button></span></form></div>
+                <div class="form">
+
+                    <form method="get">
+                        <button type="submit" class="fa fa-search"></button>
+                        <input type="text" asp-for="SearchParams" class="form-control form-input shadow p-3 mb-5 bg-body rounded" placeholder="Search by vehicle id, name, vin">
+                    </form>
+
+                    <form method="post" asp-page-handler="ClearSearchField">
+                        <span class="left-pan">
+                            <button type="submit" class="fa fa-times-circle"></button>
+                        </span>
+                    </form>
+
+                </div>
             </div>
-            <table class="table table-responsive p-xl-3">
+            <table class="table imagetable table-responsive p-xl-3" id="tblVehicleSearch">
                 <thead>
                     <tr>
                         <th>Vehicle ID</th>
@@ -20,6 +34,7 @@
                         <th>VIN</th>
                         <th>Fleet</th>
                         <th>Last Service</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,6 +47,7 @@
                             <td>@vehicle.VIN</td>
                             <td>@vehicle.Fleet</td>
                             <td>@vehicle.LastService.ToString("yyyy-MM-dd")</td>
+                            <td><a id=@vehicle.Id class="btn btn-primary" asp-page="/Vehicles/Edit" asp-route-id="@vehicle.Id">Edit</a></td>
                         </tr>
                     }
                 </tbody>
@@ -39,3 +55,27 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+
+        $("#tblVehicleSearch tr").click(function () {
+            var selected = $(this).hasClass("highlight");
+            $("#tblVehicleSearch tr").removeClass("highlight");
+            if (!selected) {
+                $(this).addClass("highlight");
+                var btnEditSelection = $(this).find("a").attr('id');
+                $('#' + btnEditSelection).focus();
+            }
+        });
+
+        $('#tblVehicleSearch tr').dblclick(function () {
+            debugger;
+            var btnEditSelection = $(this).find("a").attr('id');
+            $('#' + btnEditSelection).focus();
+            var e = jQuery.Event("keydown", { keyCode: 13 });
+            $("#" + btnEditSelection).trigger(e);
+        })
+    </script>
+
+}

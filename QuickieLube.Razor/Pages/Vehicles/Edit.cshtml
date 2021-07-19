@@ -1,0 +1,58 @@
+﻿@page  "{id}"
+@model QuickieLube.Razor.Pages.Vehicles.EditModel
+@{
+    ViewData["Title"] = "Vehicle Edit";
+}
+<h3>Edit</h3>
+<form method="post" class="p-5">
+
+    <input hidden asp-for="Vehicle.Id" />
+
+    <div class="form-group row p-xl-2 p-sm-2 p-md-2 p-lg-2">
+        <label class="col-sm-2 col-form-label" asp-for="Vehicle.Name"></label>
+        <div class="col-sm-6">
+            <input type="text" placeholder="Type Name" asp-for="Vehicle.Name" class="form-control" />
+            <span asp-validation-for="Vehicle.Name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row p-xl-2 p-sm-2 p-md-2 p-lg-2">
+        <label class="col-sm-2 col-form-label" asp-for="Vehicle.Description"></label>
+        <div class="col-sm-6">
+            <input type="text" placeholder="Type Description" asp-for="Vehicle.Description" class="form-control" />
+            <span asp-validation-for="Vehicle.Description" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row p-xl-2 p-sm-2 p-md-2 p-lg-2">
+        <label class="col-sm-2 col-form-label" asp-for="Vehicle.VIN"></label>
+        <div class="col-sm-6">
+            <input type="text" placeholder="Type VIN" asp-for="Vehicle.VIN" class="form-control" />
+            <span asp-validation-for="Vehicle.VIN" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row p-xl-2 p-sm-2 p-md-2 p-lg-2">
+        <label class="col-sm-2 col-form-label" asp-for="Vehicle.Fleet"></label>
+        <div class="col-sm-6">
+            <input type="text" placeholder="Type Fleet" asp-for="Vehicle.Fleet" class="form-control" />
+            <span asp-validation-for="Vehicle.Fleet" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row p-xl-2 p-sm-2 p-md-2 p-lg-2">
+        <label class="col-sm-2 col-form-label" asp-for="Vehicle.LastService"></label>
+        <div class="col-sm-6">
+            <input type="text" placeholder="Type LastService" asp-for="Vehicle.LastService" asp-format="{0:yyyy-MM-dd}" class="form-control">
+            <span asp-validation-for="Vehicle.LastService" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row p-xl-2 p-sm-2 p-md-2 p-lg-2">
+        <div class="col-sm-12">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-page="/Vehicles/VehicleSearch" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+
+</form>
