@@ -25,6 +25,11 @@ namespace QuickieLube.Application.Vehicles
             };
         }
 
+        public VehicleRepository(List<Vehicle> vehicles)
+        {
+            _vehicles = vehicles;
+        }
+
         public IEnumerable<Vehicle> SearchVehicle(string searchParams)
         {
 
