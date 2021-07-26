@@ -16,8 +16,21 @@ namespace QuickieLube.Domain.Vehicles
         [Required(ErrorMessage = "Fleet is required")]
         public string Fleet { get; set; }
         [Display(Name = "Last Service")]
-        [Required(ErrorMessage = "LastService is required")]
+        [Required(ErrorMessage = "Last Service is required")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? LastService { get; set; }
+        public override bool Equals(Object obj)
+        {
+            if (obj is Vehicle)
+            {
+                var that = obj as Vehicle;
+
+                return this.Id == that.Id && this.Name == that.Name
+                        && this.Description == that.Description && this.VIN == that.VIN
+                        && this.Fleet == that.Fleet && this.LastService == that.LastService;
+            }
+
+            return false;
+        }
     }
 }

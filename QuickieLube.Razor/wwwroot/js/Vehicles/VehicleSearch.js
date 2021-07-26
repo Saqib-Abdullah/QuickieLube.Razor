@@ -4,9 +4,12 @@ var selectedRow = 1;
 // holds the start time
 var start;
 
-
 // keydown event for the navigation using keyboard
 $('body').on('keydown', function (e) {
+
+    // enable every keystrokes excpet enter(13), arrowup(38) and arrowdown(40)
+    if (e.keyCode != 13 && e.keyCode != 38 && e.keyCode != 40)
+        return true;
 
     if (e.keyCode == 13) {
         var element = $("#tblVehicleSearch tr:eq('" + selectedRow + "')");
@@ -14,7 +17,7 @@ $('body').on('keydown', function (e) {
         return false;
     }
 
-    //Calculate new row
+    // Calculate new row
     if (e.keyCode == 38) {
         selectedRow--;
     } else if (e.keyCode == 40) {
@@ -26,7 +29,7 @@ $('body').on('keydown', function (e) {
         selectedRow = rows.length - 1;
     }
 
-    //Set new row's color
+    // Set new row's color
     $("#tblVehicleSearch tr").removeClass("highlight");
     var selected = $("#tblVehicleSearch tr:eq('" + selectedRow + "')").hasClass("highlight");
 
@@ -36,10 +39,7 @@ $('body').on('keydown', function (e) {
         $('#' + btnEditId).focus();
     }
 
-
 });
-
-
 
 // highlight row using mouse click 
 $("#tblVehicleSearch tr").click(function () {
@@ -62,16 +62,16 @@ $('#tblVehicleSearch tr').dblclick(function (e) {
     EditEventCall(this);
 });
 
-//edit record using long touch
-jQuery("#tblVehicleSearch tr").on('mousedown', function (e) {
+// edit record using long touch
+$("#tblVehicleSearch tr").on('mousedown', function (e) {
     start = new Date().getTime();
 });
 
-jQuery("#tblVehicleSearch tr").on('mouseleave', function (e) {
+$("#tblVehicleSearch tr").on('mouseleave', function (e) {
     start = 0;
 });
 
-jQuery("#tblVehicleSearch tr").on('mouseup', function (e) {
+$("#tblVehicleSearch tr").on('mouseup', function (e) {
     if (new Date().getTime() >= (start + longpress)) {
         EditEventCall(this);
     }
