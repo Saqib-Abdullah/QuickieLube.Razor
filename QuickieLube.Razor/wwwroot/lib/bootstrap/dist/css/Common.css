@@ -29,7 +29,7 @@
     padding-left: 7px
 }
 
-.left-pan i {
+    .left-pan i {
         padding-left: 10px
     }
 
@@ -44,11 +44,11 @@ input.form-control {
 }
 
 .form-control:focus {
-  border-color:#d11241;
+    border-color: #d11241;
 }
 
 .bg-red {
-    background-color: #d11241 !important  ;
+    background-color: #d11241 !important;
 }
 
 
@@ -113,11 +113,12 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: rgb(232 232 232)    ;
+    background: rgb(232 232 232);
     color: #d11241;
     /*background-color: #d11241;*/
     transition: all 0.3s;
 }
+
 #sidebar_content {
     background: rgb(232 232 232);
     color: #d11241;
@@ -127,9 +128,10 @@ a:focus {
     max-width: 100%;
 }
 
-    #sidebar.active {
-        margin-left: -250px;
-    }
+#sidebar.active {
+    margin-left: -250px;
+}
+
 #sidebar_content .sidebar-header {
     padding: 8px;
     background: #d11241;
@@ -139,38 +141,38 @@ a:focus {
 }
 
 
-    #sidebar .sidebar-header {
-        padding: 8px;
-        background: #9d0e31;
-        color: white;
-        text-align:center;
+#sidebar .sidebar-header {
+    padding: 8px;
+    background: #9d0e31;
+    color: white;
+    text-align: center;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+    #sidebar ul li a:hover {
+        color: #7386D5;
+        background: #fff;
     }
 
-    #sidebar ul.components {
-        padding: 20px 0;
-        border-bottom: 1px solid #47748b;
-    }
-
-    #sidebar ul p {
-        color: #fff;
-        padding: 10px;
-    }
-
-    #sidebar ul li a {
-        padding: 10px;
-        font-size: 1.1em;
-        display: block;
-    }
-
-        #sidebar ul li a:hover {
-            color: #7386D5;
-            background: #fff;
-        }
-
-    #sidebar ul li.active > a,
-    a[aria-expanded="true"] {
-        color: black;
-    }
+#sidebar ul li.active > a,
+a[aria-expanded="true"] {
+    color: black;
+}
 
 a[data-toggle="collapse"] {
     position: relative;
@@ -240,6 +242,7 @@ a.article:hover {
     #sidebarCollapse span {
         display: none;
     }
+
     .mobile_hide {
         display: none;
     }
@@ -257,4 +260,7 @@ a.article:hover {
     background-color: #d1124182;
 }
 
- 
+.divPadding {
+    padding-left: 1% !important;
+    padding-right: 4% !important;
+}

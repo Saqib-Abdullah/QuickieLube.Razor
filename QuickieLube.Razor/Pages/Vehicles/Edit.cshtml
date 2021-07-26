@@ -8,51 +8,62 @@
 
     <input hidden asp-for="Vehicle.Id" />
 
-    <div class="form-group row p-xl-2 p-sm-2 p-md-2 p-lg-2">
+    <div class="form-group row p-sm-2">
         <label class="col-sm-2 col-form-label" asp-for="Vehicle.Name"></label>
-        <div class="col-sm-6">
+        <div class="col-sm-10">
             <input type="text" placeholder="Type Name" asp-for="Vehicle.Name" class="form-control" />
             <span asp-validation-for="Vehicle.Name" class="text-danger"></span>
         </div>
     </div>
 
-    <div class="form-group row p-xl-2 p-sm-2 p-md-2 p-lg-2">
+    <div class="form-group row p-sm-2">
         <label class="col-sm-2 col-form-label" asp-for="Vehicle.Description"></label>
-        <div class="col-sm-6">
+        <div class="col-sm-10">
             <input type="text" placeholder="Type Description" asp-for="Vehicle.Description" class="form-control" />
             <span asp-validation-for="Vehicle.Description" class="text-danger"></span>
         </div>
     </div>
 
-    <div class="form-group row p-xl-2 p-sm-2 p-md-2 p-lg-2">
+    <div class="form-group row p-sm-2">
         <label class="col-sm-2 col-form-label" asp-for="Vehicle.VIN"></label>
-        <div class="col-sm-6">
+        <div class="col-sm-10">
             <input type="text" placeholder="Type VIN" asp-for="Vehicle.VIN" class="form-control" />
             <span asp-validation-for="Vehicle.VIN" class="text-danger"></span>
         </div>
     </div>
 
-    <div class="form-group row p-xl-2 p-sm-2 p-md-2 p-lg-2">
+    <div class="form-group row p-sm-2">
         <label class="col-sm-2 col-form-label" asp-for="Vehicle.Fleet"></label>
-        <div class="col-sm-6">
+        <div class="col-sm-10">
             <input type="text" placeholder="Type Fleet" asp-for="Vehicle.Fleet" class="form-control" />
             <span asp-validation-for="Vehicle.Fleet" class="text-danger"></span>
         </div>
     </div>
 
-    <div class="form-group row p-xl-2 p-sm-2 p-md-2 p-lg-2">
+    <div class="form-group row p-sm-2">
         <label class="col-sm-2 col-form-label" asp-for="Vehicle.LastService"></label>
-        <div class="col-sm-6">
+        <div class="col-sm-10">
             <input type="text" placeholder="Type LastService" asp-for="Vehicle.LastService" asp-format="{0:yyyy-MM-dd}" class="form-control">
             <span asp-validation-for="Vehicle.LastService" class="text-danger"></span>
         </div>
     </div>
 
-    <div class="form-group row p-xl-2 p-sm-2 p-md-2 p-lg-2">
-        <div class="col-sm-12">
-            <button type="submit" class="btn btn-primary">Update</button>
-            <a asp-page="/Vehicles/VehicleSearch" class="btn btn-primary">Cancel</a>
+    <div class="form-group row p-sm-2">
+        <div class="col-sm-12 divPadding">
+            <button class="btn btn-primary col-12 m-2 col-lg-2">Update</button>
+            <input class="d-block d-lg-none btn btn-primary col-12 col-lg-2 m-2" type="button" id="btnUndo" value="Undo" />
+            <a asp-page="/Vehicles/VehicleSearch" class="btn btn-primary col-12 m-2 col-lg-2">Cancel</a>
         </div>
     </div>
 
 </form>
+
+@section Scripts{
+
+    <script>
+        // undo functionality for medium devices like tablet,mobile etc that have <768px screen size
+        $('#btnUndo').click(function () {
+            document.execCommand('undo', false, null);
+        });
+    </script>
+}
