@@ -24,7 +24,7 @@ namespace QuickieLube.Tests
         public void SearchVehicle_ReturnsListofVehicles()
         {
             //arrange
-            var mockVehicle = new List<Vehicle>()
+            var mockVehicles = new List<Vehicle>()
             {
                 new Vehicle(){Id="ON-AVX",Name="Ford",Description="2015 Ford",VIN="5GAK",Fleet="",LastService=DateTime.Now.AddDays(-10)},
                 new Vehicle(){Id="TX-K51",Name="BMW",Description="2011 BMW",VIN="5ABC",Fleet="",LastService=DateTime.Now.AddDays(-11)},
@@ -35,7 +35,7 @@ namespace QuickieLube.Tests
                 new Vehicle(){Id="ON-AV12X",Name="mercedes",Description="2007 mercedes",VIN="2GUE",Fleet="",LastService=DateTime.Now.AddDays(-5)},
             };
 
-            _mockVehicleList.Object.AddRange(mockVehicle);
+            _mockVehicleList.Object.AddRange(mockVehicles);
 
             //act
             var result = _vehicleRepository.SearchVehicle("");
@@ -46,45 +46,78 @@ namespace QuickieLube.Tests
         }
 
         [Fact]
-        public void EditVehicle_ReturnsEditedVehicle()
+        public void SearchVehicle_ReturnsCorrectVehicle()
         {
             //arrange
-            Vehicle mockEditVehicle = new Vehicle() { Id = "ON-AVX", Name = "Ford", Description = "2015 Ford", VIN = "5GAK", Fleet = "1", LastService = null };
-            var mockVehicle = new List<Vehicle>()
+            var expectedVehicle = new Vehicle() { Id = "TX-K51", Name = "BMW C", Description = "2020 BMW", VIN = "AA258", Fleet = "G", LastService = DateTime.Now.AddDays(-20) };
+            var mockVehicles = new List<Vehicle>()
+            {
+                new Vehicle(){Id="ON-AVX",Name="Ford",Description="2015 Ford",VIN="5GAK",Fleet="",LastService=DateTime.Now.AddDays(-10)},
+                 new Vehicle(){Id=expectedVehicle.Id,Name=expectedVehicle.Name,Description=expectedVehicle.Description,VIN=expectedVehicle.VIN,
+                     Fleet=expectedVehicle.Fleet,LastService=expectedVehicle.LastService},
+                new Vehicle(){Id="ON-AV12X",Name="mercedes",Description="2007 mercedes",VIN="2GUE",Fleet="",LastService=DateTime.Now.AddDays(-5)},
+            };
+
+            _mockVehicleList.Object.AddRange(mockVehicles);
+
+            //act
+            var result = _vehicleRepository.SearchVehicle(expectedVehicle.Id);
+
+            //assert
+            Assert.Single(result);
+            Assert.Equal(expectedVehicle, result.FirstOrDefault());
+
+            //act
+            result = _vehicleRepository.SearchVehicle(expectedVehicle.VIN);
+
+            //assert
+            Assert.Single(result);
+            Assert.Equal(expectedVehicle, result.FirstOrDefault());
+        }
+
+        [Fact]
+        public void GetVehicleById_ReturnsSingleRecordOfVehicle()
+        {
+            //arrange
+            Vehicle expectedVehicle = new Vehicle() { Id = "ON-AVX", Name = "Ford", Description = "2015 Ford", VIN = "5GAK", Fleet = "1", LastService = null };
+            var mockVehicles = new List<Vehicle>()
             {
                 new Vehicle(){Id="ON-AVX",Name="Ford",Description="2015 Ford",VIN="5GAK",Fleet="1",LastService=null},
                 new Vehicle(){Id="TX-H71T",Name="mercedes",Description="2013 mercedes",VIN="6KDE",Fleet="",LastService=DateTime.Now.AddDays(-2)},
                 new Vehicle(){Id="TX-2588QW",Name="BMW",Description="2004 BMW",VIN="AA258",Fleet="1",LastService=DateTime.Now.AddDays(-20)},
             };
 
-            _mockVehicleList.Object.AddRange(mockVehicle);
+            _mockVehicleList.Object.AddRange(mockVehicles);
 
             //act
-            var result = _vehicleRepository.EditVehicle("ON-AVX");
+            var result = _vehicleRepository.GetVehicleById(expectedVehicle.Id);
 
             //assert
-            Assert.Equal<Vehicle>(mockEditVehicle, result);
+            Assert.Equal<Vehicle>(expectedVehicle, result);
         }
 
         [Fact]
-        public void UpdateVehicle_ReturnsUpdatedVehicle()
+        public void EditVehicle_ReturnsCorrectVehicleResult()
         {
             //arrange
-            var mockUpdateVechile = new Vehicle() { Id = "TX-K51", Name = "BMW C", Description = "2020 BMW", VIN = "AA258", Fleet = "G", LastService = DateTime.Now.AddDays(-20) };
-            var mockVehicle = new List<Vehicle>()
+            var expectedVehicle = new Vehicle() { Id = "TX-K51", Name = "BMW C", Description = "2020 BMW", VIN = "AA258", Fleet = "G", LastService = DateTime.Now.AddDays(-20) };
+            var mockVehicles = new List<Vehicle>()
             {
                 new Vehicle(){Id="ON-AVX",Name="Ford",Description="2015 Ford",VIN="5GAK",Fleet="",LastService=DateTime.Now.AddDays(-10)},
                 new Vehicle(){Id="TX-K51",Name="BMW",Description="2011 BMW",VIN="5ABC",Fleet="",LastService=DateTime.Now.AddDays(-11)},
                 new Vehicle(){Id="ON-AV12X",Name="mercedes",Description="2007 mercedes",VIN="2GUE",Fleet="",LastService=DateTime.Now.AddDays(-5)},
             };
 
-            _mockVehicleList.Object.AddRange(mockVehicle);
+            _mockVehicleList.Object.AddRange(mockVehicles);
 
             //act
-            var result = _vehicleRepository.UpdateVehicle(mockUpdateVechile);
+            _vehicleRepository.EditVehicle(expectedVehicle);
+            var result = _vehicleRepository.SearchVehicle(expectedVehicle.Id);
 
             //assert
-            Assert.Equal<Vehicle>(mockUpdateVechile, result);
+            Assert.Equal<Vehicle>(expectedVehicle, result.FirstOrDefault());
+
         }
+
     }
 }

@@ -44,25 +44,24 @@ namespace QuickieLube.Application.Vehicles
                                            .OrderByDescending(s => s.LastService);
         }
 
-        public Vehicle EditVehicle(string id)
+        public Vehicle GetVehicleById(string id)
         {
             return _vehicles.FirstOrDefault(s => s.Id == id);
         }
 
-        public Vehicle UpdateVehicle(Vehicle updatedVehicle)
+        public void EditVehicle(Vehicle editedVehicle)
         {
-            Vehicle vehicle = _vehicles.FirstOrDefault(s => s.Id == updatedVehicle.Id);
+            Vehicle vehicle = _vehicles.FirstOrDefault(s => s.Id == editedVehicle.Id);
 
             if (vehicle != null)
             {
-                vehicle.Name = updatedVehicle.Name;
-                vehicle.Description = updatedVehicle.Description;
-                vehicle.VIN = updatedVehicle.VIN;
-                vehicle.Fleet = updatedVehicle.Fleet;
-                vehicle.LastService = updatedVehicle.LastService;
+                vehicle.Name = editedVehicle.Name;
+                vehicle.Description = editedVehicle.Description;
+                vehicle.VIN = editedVehicle.VIN;
+                vehicle.Fleet = editedVehicle.Fleet;
+                vehicle.LastService = editedVehicle.LastService;
             }
 
-            return vehicle;
         }
     }
 }

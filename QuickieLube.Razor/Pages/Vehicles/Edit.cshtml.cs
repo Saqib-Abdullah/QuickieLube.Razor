@@ -22,7 +22,7 @@ namespace QuickieLube.Razor.Pages.Vehicles
 
         public IActionResult OnGet(string id)
         {
-            Vehicle = _vehicleRepository.EditVehicle(id);
+            Vehicle = _vehicleRepository.GetVehicleById(id);
 
             if (Vehicle == null)
             {
@@ -38,7 +38,7 @@ namespace QuickieLube.Razor.Pages.Vehicles
             {
                 try
                 {
-                    Vehicle = _vehicleRepository.UpdateVehicle(Vehicle);
+                    _vehicleRepository.EditVehicle(Vehicle);
                     return RedirectToPage("/Vehicles/VehicleSearch");
                 }
                 catch (Exception)

@@ -7,7 +7,7 @@ namespace QuickieLube.Application.Vehicles
     public interface IVehicleRepository
     {
         IEnumerable<Vehicle> SearchVehicle(string searchParams);
-        Vehicle EditVehicle(string id);
-        Vehicle UpdateVehicle(Vehicle updatedVehicle);
+        Vehicle GetVehicleById(string id);
+        void EditVehicle(Vehicle editedVehicle);
     }
 }
